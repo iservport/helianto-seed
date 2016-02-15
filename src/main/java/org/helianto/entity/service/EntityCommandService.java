@@ -66,8 +66,6 @@ public class EntityCommandService {
 	@Inject 
 	private	EntityInstallStrategy entityInstallStrategy;
 	
-	@Inject
-	private	EntityInstallService entityInstallService;
 	
 //	/**
 //	 * Save an Entity.
@@ -122,7 +120,7 @@ public class EntityCommandService {
             target.setCity(city);
 			Identity identity = identityRepository.findOne(identityId);
             target = entityRepository.saveAndFlush(target.merge(command));
-            entityInstallService.createUser(target, identity);
+            createUser(target, identity);
             installAuthorities(target.getId());
             return target;
 		}
